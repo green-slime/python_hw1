@@ -21,7 +21,7 @@ messvar.set("Click search and wait for a moment...")
 dirvar=tk.StringVar();
 dirvar.set("dir has not been set.")
 lbox=tk.Listbox(win,selectmode=tk.MULTIPLE,width=100,height=20);
-l4=tk.Label(win,bg='snow',fg='green')
+infolabel=tk.Label(win,bg='snow',fg='green')
 
 def dir1(top):
     global dir
@@ -55,12 +55,12 @@ def download_dir(): # child widget
 def dl_s(a,dir):
     sl=lbox.curselection();
     a.download_selected_bib(dir,sl);
-    l4.config(text='Selected documents have been downloaded.') 
-    l4.grid(row=6,column=0,columnspan=2);
+    infolabel.config(text='Selected documents have been downloaded.') 
+    infolabel.grid(row=6,column=0,columnspan=2);
 def dl_all(a,dir):
     a.download_all_bib(dir)
-    l4.config(text='All documents have been downloaded.') 
-    l4.grid(row=6,column=0,columnspan=2);
+    infolabel.config(text='All documents have been downloaded.') 
+    infolabel.grid(row=6,column=0,columnspan=2);
 def ensure(a,dir):
     choice=mb.askyesno('Continue to download?','Download all will consume a lot of time. Continue?')   
     if choice==True:
@@ -84,13 +84,13 @@ def search():
     d_all.grid(row=5,column=1)
     
 
-b=tk.Button(win,text="search",command=search);
-b.grid(row=3,column=0)
+searchbtn=tk.Button(win,text="search",command=search);
+searchbtn.grid(row=3,column=0)
 mess=tk.Label(win,textvariable=messvar,bg='silver',fg='black',width=40);
 mess.grid(row=1,column=1)
-d=tk.Button(win,text="choose dir",command=download_dir);
-l3=tk.Label(win,textvariable=dirvar,bg='silver',fg='black')
-d.grid(row=2,column=1)
-l3.grid(row=3,column=1)
+dirbtn=tk.Button(win,text="choose dir",command=download_dir);
+dirlabel=tk.Label(win,textvariable=dirvar,bg='silver',fg='black')
+dirbtn.grid(row=2,column=1)
+dirlabel.grid(row=3,column=1)
 
 win.mainloop();
