@@ -29,7 +29,12 @@ class dblp:
         for i in range(0,self.n):
             self.links[i]=self.links[i].replace(".html?view=bibtex",".bib?param=1")
             # now they are download links
-        
+        self.titlelist=self.soup.find_all('span',class_='title');
+        self.titles=[]; # used for listbox in gui
+        for title in self.titlelist:
+            self.titles.append(title.text);
+        for i in range(0,self.n):
+            self.titles[i]=str(i)+"_"+self.titles[i];
     def printbib(self):
         print(self.links);
 
@@ -46,7 +51,7 @@ class dblp:
         self.create_dir(dir); 
         dir=self.dir;   
         for i in range(0,self.n):
-            print("downloading "+str(i)+"th")
+            print("downloading "+str(i)+"th bib;")
             filepath=os.path.join(dir,str(i)+".bib")
             urlretrieve(self.links[i],filepath); 
         print("success in downloading "+str(self.n)+" bibs.");
@@ -55,7 +60,8 @@ class dblp:
         self.create_dir(dir);
         dir=self.dir;  
         for i in index:
-            print("downloading "+str(i)+"th")
+            print("downloading "+str(i)+"th bib;")
             filepath=os.path.join(dir,str(i)+".bib")
             urlretrieve(self.links[i],filepath);
         print("success in downloading "+str(len(index))+" bibs.");
+

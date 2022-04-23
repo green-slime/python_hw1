@@ -15,7 +15,7 @@ w.pack();
 messvar=tk.StringVar();
 dirvar=tk.StringVar();
 dirvar.set("dir has not been set.")
-lbox=tk.Listbox(win,selectmode=tk.MULTIPLE);
+lbox=tk.Listbox(win,selectmode=tk.MULTIPLE,width=100,height=20);
 
 def dir1(top):
     global dir
@@ -60,7 +60,7 @@ def search():
     d.pack();
     l3.pack();
     
-    for articles in a.links:
+    for articles in a.titles:
         lbox.insert('end',articles)
     lbox.pack();
     
