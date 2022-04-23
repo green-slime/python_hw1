@@ -33,18 +33,29 @@ class dblp:
     def printbib(self):
         print(self.links);
 
-    def downloadbib(self,dir=''):
+    def create_dir(self,dir=''):
         if dir=='' or dir=='Default':
             dir=os.path.abspath('.')
             dir=os.path.join(dir,self.author)   # Default: download in workdir
         if not os.path.exists(dir):
             print("Cannot detect this folder, creating a new one...");
-            os.makedirs(dir)    
+            os.makedirs(dir)
+        self.dir=dir;
+
+    def download_all_bib(self,dir=''):
+        self.create_dir(dir); 
+        dir=self.dir;   
         for i in range(0,self.n):
             print("downloading "+str(i)+"th")
             filepath=os.path.join(dir,str(i)+".bib")
             urlretrieve(self.links[i],filepath); 
-'''               
-a=dblp("Ya-qin Zhang");
-a.downloadbib('D:\\C++\\test');
-'''
+        print("success in downloading "+str(self.n)+" bibs.");
+
+    def download_selected_bib(self,dir='',index=[]):
+        self.create_dir(dir);
+        dir=self.dir;  
+        for i in index:
+            print("downloading "+str(i)+"th")
+            filepath=os.path.join(dir,str(i)+".bib")
+            urlretrieve(self.links[i],filepath);
+        print("success in downloading "+str(len(index))+" bibs.");
