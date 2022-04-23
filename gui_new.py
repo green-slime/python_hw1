@@ -1,4 +1,6 @@
+import imp
 import tkinter as tk
+import tkinter.messagebox as mb
 import dblp_search as crawl
 
 win=tk.Tk();
@@ -59,7 +61,11 @@ def dl_all(a,dir):
     a.download_all_bib(dir)
     l4.config(text='All documents have been downloaded.') 
     l4.grid(row=6,column=0,columnspan=2);
-    
+def ensure(a,dir):
+    choice=mb.askyesno('Continue to download?','Download all will consume a lot of time. Continue?')   
+    if choice==True:
+        dl_all(a,dir)
+
 def search():
     global authorname;
     authorname=w.get();
@@ -74,7 +80,7 @@ def search():
     
     d_selected=tk.Button(win,text="Download Selected",command=lambda:dl_s(a,dir))
     d_selected.grid(row=5,column=0)  
-    d_all=tk.Button(win,text="Download All",command=lambda: dl_all(a,dir))  
+    d_all=tk.Button(win,text="Download All",command=lambda: ensure(a,dir))  
     d_all.grid(row=5,column=1)
     
 
